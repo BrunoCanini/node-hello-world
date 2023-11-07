@@ -9,7 +9,6 @@ dotenv.config();
 const port = +process.env.PORT || 3000;
 
 // funzione frase casuale
-let sentinella ;
 
 function randomFrase(){
     const frasi = [
@@ -29,10 +28,15 @@ function randomFrase(){
 
 // creiamo il server con la seguente funzione
 const server = http.createServer(function(req, res){
+    
+    if(req.url == "/favicon.ico"){
+        res.writeHead(404).end();
+    } else {
+            // specifichiamo come risponde il server
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8"});
+            res.end("Ciao, frase " + process.env.FRASE + randomFrase());
+    }
 
-    // specifichiamo come risponde il server
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8"});
-    res.end("Ciao, frase " + process.env.FRASE + randomFrase());
 
 })
 
