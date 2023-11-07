@@ -1,5 +1,6 @@
 // importo il modulo http
 const http = require("http"); 
+
 // importo la libreria dotenv
 const dotenv = require("dotenv");
 dotenv.config();
@@ -8,6 +9,8 @@ dotenv.config();
 const port = +process.env.PORT || 3000;
 
 // funzione frase casuale
+let sentinella ;
+
 function randomFrase(){
     const frasi = [
         "E HO GUARDATO DENTRO UN'EMOZIONE, E CI HO VISTO DENTRO TANTO AMORE, CHE HO CAPITO PERCHÉ NON SI COMANDA AL CUORE.",
@@ -28,6 +31,7 @@ function randomFrase(){
 const server = http.createServer(function(req, res){
 
     // specifichiamo come risponde il server
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8"});
     res.end("Ciao, frase " + process.env.FRASE + randomFrase());
 
 })
